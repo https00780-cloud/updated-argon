@@ -52,11 +52,7 @@ export const Route = createFileRoute("/posts/$slug")({
             wordCount: meta.wordCount,
             keywords: meta.keywords,
             articleSection: meta.category,
-            author: {
-              "@type": "Organization",
-              name: "Argon Addon",
-              url: SITE_URL,
-            },
+            author: { "@type": "Organization", name: "Argon Addon", url: SITE_URL },
             publisher: {
               "@type": "Organization",
               name: "Argon Addon",
@@ -95,7 +91,7 @@ function PostPage() {
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-6 pb-24">
-        <nav aria-label="Breadcrumb" className="mb-4 font-mono text-xs text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
           <Link to="/" className="hover:text-foreground">
             Home
           </Link>
@@ -107,7 +103,7 @@ function PostPage() {
           <span className="text-foreground">{meta.category}</span>
         </nav>
 
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-primary">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
           <span>{meta.category}</span>
           <span className="opacity-50">·</span>
           <span>{meta.date}</span>
@@ -117,60 +113,60 @@ function PostPage() {
           </span>
         </div>
 
-        <h1 className="reveal mt-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+        <h1 className="font-display reveal mt-5 text-5xl leading-[1.04] tracking-tight md:text-7xl">
           {meta.title}
         </h1>
-        <p className="reveal reveal-delay-1 mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="reveal reveal-delay-1 mt-6 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">
           {meta.description}
         </p>
 
-        <hr className="my-10 border-border" />
+        <div className="aurora-line mt-10" />
 
-        <div className="prose-article">{body}</div>
+        <div className="prose-article mt-10">{body}</div>
 
-        {/* Inline CTA */}
-        <section className="mt-14 rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-secondary/40 p-7 shadow-glow">
-          <h2 className="text-xl font-bold tracking-tight md:text-2xl">
-            Want the .jar? It's free.
+        <section className="mt-16 overflow-hidden rounded-3xl border border-primary/25 bg-gradient-brand-soft p-8">
+          <h2 className="font-display text-2xl leading-tight md:text-3xl">
+            Want the .jar? <em className="text-gradient-brand not-italic">It's free.</em>
           </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-2 text-[14px] text-muted-foreground">
             Everything in this guide ships in the one Argon Addon .jar. Drop it in your Fabric mods
             folder.
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <a
               href={DOWNLOAD_URL}
               download
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+              className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-semibold"
               data-testid="post-download-btn"
             >
               <Download className="h-4 w-4" /> Download Argon Addon
             </a>
             <Link
               to="/install"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold transition hover:border-primary/50"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-medium text-foreground"
             >
               Install guide
             </Link>
           </div>
         </section>
 
-        {/* Related */}
         <section className="mt-16">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-primary">Read next</h2>
-          <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="tag">Read next</div>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
             {related.map((r) => (
               <Link
                 key={r.slug}
                 to="/posts/$slug"
                 params={{ slug: r.slug }}
-                className="group rounded-xl border border-border bg-card p-5 transition hover:border-primary/40"
+                className="lift-card group rounded-2xl border border-border bg-card/50 p-5 backdrop-blur"
               >
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   {r.category} · {r.readMinutes} min
                 </div>
-                <div className="mt-2 text-sm font-semibold leading-snug">{r.title}</div>
-                <div className="mt-3 inline-flex items-center gap-1 text-xs text-primary opacity-0 transition group-hover:opacity-100">
+                <div className="font-display mt-3 text-lg leading-snug text-foreground">
+                  {r.title}
+                </div>
+                <div className="mt-4 inline-flex items-center gap-1 text-[12px] text-primary opacity-0 transition group-hover:opacity-100">
                   Read <ChevronRight className="h-3 w-3" />
                 </div>
               </Link>
@@ -178,7 +174,7 @@ function PostPage() {
           </div>
           <Link
             to="/posts"
-            className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            className="mt-7 inline-flex items-center gap-1.5 text-[13.5px] text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> All posts
           </Link>
@@ -188,8 +184,6 @@ function PostPage() {
   );
 }
 
-// Shared prose styles for article bodies (referenced as className="prose-article")
-// Defined locally because there's no @tailwindcss/typography in this project.
 export function ProseArticle({ children }: { children: ReactNode }) {
   return <div className="prose-article">{children}</div>;
 }

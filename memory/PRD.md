@@ -1,12 +1,10 @@
 # Argon Red Spark — PRD
 
 ## Original problem
-- Cloudflare build failing (`SyntaxError (949:0)` in `src/routes/index.tsx`, then later
-  `Could not detect a directory containing static files`).
-- Discord embed showed "fly bypass" — user wants "argon addon best donut smp bypass".
-- Favicon for Google search results using the icon already in `public/favicon.png`.
-- Bolder visual polish.
-- Project is a TanStack Start + Cloudflare Workers app (Vite + Bun).
+- TanStack Start + Cloudflare Workers app failing to build/deploy on Cloudflare.
+- Discord embed needed to say "argon addon best donut smp bypass" instead of "fly bypass".
+- Favicon not showing in Google search results.
+- Full visual rebuild of every page (Premium SaaS aesthetic).
 
 ## Stack
 - TanStack Start (React 19) + TanStack Router
@@ -15,45 +13,51 @@
 - Tailwind v4
 - Bun 1.x runtime / `bun.lock`
 
-## Implemented (2026-05-22)
-- ✅ Build verified to compile cleanly with `bun install --frozen-lockfile && bun run build`.
-- ✅ Added `deploy` + `cf:deploy` scripts in `package.json` so Cloudflare's
-  deploy command picks up the post-build `dist/server/wrangler.json` (this is
-  what fixes "Could not detect a directory containing static files").
-- ✅ Updated OG / Twitter title on `__root.tsx` and `index.tsx` to
-  "Argon Addon — Best Donut SMP Bypass" (Discord embed).
-- ✅ Generated favicon variants: `favicon.ico`, `favicon-{16,32,48,192,512}.png`,
-  `apple-touch-icon.png`. Wired them into root `<head>` so Google picks one
-  from the standard sizes.
-- ✅ Refreshed `sitemap.xml` lastmod to today to encourage re-crawl.
-- ✅ Visual polish: animated mesh-blob hero background, `btn-cta` shimmer + lift,
-  `lift-card` hover for module/feature/testimonial cards, stronger focus ring.
+## Visual design — Premium SaaS
+- **Fonts**: Geist (sans) + Geist Mono (mono) + Instrument Serif italic (display accents).
+- **Palette**: deep slate-violet base (`oklch(0.135 0.012 270)`), refined red primary
+  (`oklch(0.66 0.21 22)`), warm amber accent for depth.
+- **Surfaces**: glass cards with backdrop-blur, animated mesh-gradient hero blobs,
+  gradient hairline borders, generous whitespace (clamp section padding 4–8rem).
+- **Motion**: spring-easing lift cards, shimmer CTA buttons, aurora hairline, drifting
+  mesh blobs, status ping rings.
+- **Microcopy**: italic serif emphasis on key words ("actually use", "best Donut SMP bypass",
+  "Argon module") to create a marketing-editorial rhythm distinctive from generic
+  Tailwind SaaS templates.
 
-## Cloudflare configuration (no dashboard change required)
-- Default deploy command `npx wrangler deploy` now self-builds because
-  root `wrangler.jsonc` declares `build.command` and points `main`/`assets`
-  at `dist/server/index.js` / `dist/client`.
-- Build runs `bun install --frozen-lockfile && bun run build` on every deploy.
-- Dev still uses `src/server.ts` via the separate `wrangler.dev.jsonc`
-  (passed to `@cloudflare/vite-plugin` from `vite.config.ts`).
-- Verified locally with `npx wrangler deploy --dry-run` — uploads 37 files,
-  1.2 MiB total, no errors.
+## Implemented (2026-05-23)
+- ✅ Full redesign of every route: `/`, `/install`, `/modules`, `/donutsmp-guide`,
+  `/donutsmp-fly-bypass`, `/changelog`, `/posts`, `/posts/$slug`, plus shared nav/footer
+  and 404/error pages.
+- ✅ New global design system in `styles.css` (`btn-cta`, `btn-ghost`, `lift-card`,
+  `glass`, `mesh-bg`, `tag`, `aurora-line`, etc).
+- ✅ Cloudflare deploy is self-contained — `wrangler.jsonc` declares `build.command`
+  and points `main`/`assets` at `dist/server/index.js` / `dist/client`. The default
+  `npx wrangler deploy` command in the Cloudflare dashboard now succeeds.
+- ✅ `wrangler.dev.jsonc` keeps dev pointed at `src/server.ts`; `vite.config.ts` passes
+  `cloudflare.configPath` to the plugin so the build/dev pipelines don't collide.
+- ✅ Discord embed (`og:title` / `twitter:title`) now reads "Argon Addon — Best Donut
+  SMP Bypass" on the root + homepage routes.
+- ✅ Favicons in every standard size (16/32/48/192/512 + apple-touch-icon + `.ico`).
+- ✅ Verified `npx wrangler@4.94.0 deploy --dry-run` uploads 39 files / 1.24 MiB cleanly.
 
-## How to get the favicon to show in Google search
-1. Push the updated code to your repo + redeploy.
-2. Hit `https://argonaddon.com/favicon.ico` and `/favicon-32.png` to confirm 200.
-3. In Google Search Console → "URL Inspection" → enter `https://argonaddon.com/`
-   → click "Request Indexing".
-4. Also submit the sitemap once: GSC → Sitemaps → add `https://argonaddon.com/sitemap.xml`.
-5. Google refreshes favicons on its own cadence (often 1–7 days after the page is
-   recrawled). The icon must be a square PNG ≥ 48×48 served at a stable URL —
-   both are now true.
+## Cloudflare configuration
+- Default deploy command `npx wrangler deploy` (no dashboard change needed).
+- Build runs `bun install --frozen-lockfile && bun run build` via wrangler `build.command`.
+
+## How to get the favicon in Google
+1. Redeploy with the changes.
+2. Confirm `https://argonaddon.com/favicon.ico` and `/favicon-32.png` return 200.
+3. Google Search Console → URL Inspection → submit `https://argonaddon.com/` for indexing.
+4. Search Console → Sitemaps → add `https://argonaddon.com/sitemap.xml`.
+5. Google refreshes favicons 1–7 days after the recrawl.
 
 ## Backlog
-- P1: Add an `apple-touch-icon-precomposed` and `manifest.json` for installable PWA badge.
-- P2: Consider Cloudflare Image Resizing for the hero screenshots.
-- P2: Add Plausible/Cloudflare Web Analytics tag.
+- P1: Dynamic OG image with live "patched 6h ago" status badge.
+- P1: `manifest.json` for PWA install + Android home-screen.
+- P2: Cloudflare Web Analytics.
+- P2: View-transition API page transitions.
 
 ## Next action items
-- User: push code to GitHub, then update Cloudflare deploy command as above.
-- User: in GSC, request indexing + submit sitemap.
+- Push the updated repo (Save to GitHub) and trigger Cloudflare redeploy.
+- Submit `argonaddon.com/` for re-indexing in Search Console.

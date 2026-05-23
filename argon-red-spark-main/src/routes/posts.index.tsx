@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, BookOpen } from "lucide-react";
 import { PageShell } from "../components/site-chrome";
 import { POSTS } from "../lib/posts";
 
@@ -9,9 +9,7 @@ export const Route = createFileRoute("/posts/")({
   component: PostsIndex,
   head: () => ({
     meta: [
-      {
-        title: "Argon Addon Blog — Guides, Tutorials & DonutSMP Strategy",
-      },
+      { title: "Argon Addon Blog — Guides, Tutorials & DonutSMP Strategy" },
       {
         name: "description",
         content:
@@ -67,10 +65,11 @@ export const Route = createFileRoute("/posts/")({
 });
 
 function PostsIndex() {
+  const [featured, ...rest] = POSTS;
   return (
     <PageShell>
-      <article className="mx-auto max-w-5xl px-6 pb-24">
-        <nav aria-label="Breadcrumb" className="mb-4 font-mono text-xs text-muted-foreground">
+      <article className="mx-auto max-w-6xl px-6 pb-24">
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
           <Link to="/" className="hover:text-foreground">
             Home
           </Link>
@@ -78,30 +77,59 @@ function PostsIndex() {
           <span className="text-foreground">Blog</span>
         </nav>
 
-        <div className="font-mono text-xs uppercase tracking-widest text-primary">
-          Blog · {POSTS.length} articles
+        <div className="tag">
+          <BookOpen className="h-3 w-3" /> Blog · {POSTS.length} articles
         </div>
-        <h1 className="reveal mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-          DonutSMP guides, written by people who actually play.
+        <h1 className="font-display reveal mt-4 text-5xl leading-[1.04] md:text-7xl">
+          DonutSMP guides,{" "}
+          <em className="text-gradient-brand not-italic">written by people who actually play.</em>
         </h1>
-        <p className="reveal reveal-delay-1 mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+        <p className="reveal reveal-delay-1 mt-6 max-w-3xl text-[16.5px] leading-relaxed text-muted-foreground">
           AH sniper setups, fly bypass walkthroughs, base-finder workflows, and module deep-dives.
           No filler, no AI-spam, no "5 reasons why X is revolutionary." Just what works on the
           server right now.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {POSTS.map((p) => (
+        {featured && (
+          <Link
+            to="/posts/$slug"
+            params={{ slug: featured.slug }}
+            className="lift-card mt-14 block overflow-hidden rounded-3xl border border-primary/25 bg-gradient-brand-soft p-8 backdrop-blur sm:p-10"
+            data-testid={`post-card-${featured.slug}`}
+          >
+            <div className="flex items-center gap-3 font-mono text-[11px] text-muted-foreground">
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 uppercase tracking-[0.15em] text-primary">
+                Featured · {featured.category}
+              </span>
+              <span>{featured.date}</span>
+              <span className="inline-flex items-center gap-1">
+                <Clock className="h-3 w-3" /> {featured.readMinutes} min
+              </span>
+            </div>
+            <h2 className="font-display mt-4 text-3xl leading-tight md:text-5xl">
+              {featured.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
+              {featured.excerpt}
+            </p>
+            <div className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-primary">
+              Read article <ArrowRight className="h-3.5 w-3.5" />
+            </div>
+          </Link>
+        )}
+
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {rest.map((p) => (
             <Link
               key={p.slug}
               to="/posts/$slug"
               params={{ slug: p.slug }}
-              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition hover:border-primary/50 hover:shadow-glow"
+              className="lift-card group flex flex-col justify-between rounded-3xl border border-border bg-card/50 p-7 backdrop-blur"
               data-testid={`post-card-${p.slug}`}
             >
               <div>
-                <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
-                  <span className="rounded-full bg-primary/15 px-2 py-0.5 uppercase tracking-wider text-primary">
+                <div className="flex items-center gap-3 font-mono text-[11px] text-muted-foreground">
+                  <span className="rounded-full border border-primary/25 bg-primary/[0.07] px-2 py-0.5 uppercase tracking-[0.15em] text-primary">
                     {p.category}
                   </span>
                   <span>{p.date}</span>
@@ -109,10 +137,12 @@ function PostsIndex() {
                     <Clock className="h-3 w-3" /> {p.readMinutes} min
                   </span>
                 </div>
-                <h2 className="mt-4 text-xl font-bold leading-snug">{p.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.excerpt}</p>
+                <h2 className="font-display mt-4 text-2xl leading-snug">{p.title}</h2>
+                <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
+                  {p.excerpt}
+                </p>
               </div>
-              <div className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+              <div className="mt-6 inline-flex items-center gap-1.5 text-[13px] font-medium text-primary">
                 Read article{" "}
                 <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
               </div>

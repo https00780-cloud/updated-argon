@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Download, Plane, ShieldCheck, AlertTriangle, Check } from "lucide-react";
+import { Download, Plane, ShieldCheck, AlertTriangle, Check, Terminal } from "lucide-react";
 import { PageShell } from "../components/site-chrome";
 
 const SITE_URL = "https://argonaddon.com";
@@ -10,9 +10,7 @@ export const Route = createFileRoute("/donutsmp-fly-bypass")({
   component: FlyBypassPage,
   head: () => ({
     meta: [
-      {
-        title: "DonutSMP Fly Bypass 2026 — The Only Working Fly On DonutSMP (Argon Addon)",
-      },
+      { title: "DonutSMP Fly Bypass 2026 — The Only Working Fly On DonutSMP (Argon Addon)" },
       {
         name: "description",
         content:
@@ -104,7 +102,7 @@ function FlyBypassPage() {
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-6 pb-24">
-        <nav aria-label="Breadcrumb" className="mb-4 font-mono text-xs text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
           <Link to="/" className="hover:text-foreground">
             Home
           </Link>
@@ -113,16 +111,17 @@ function FlyBypassPage() {
             DonutSMP Guide
           </Link>
           <span className="mx-2 opacity-60">/</span>
-          <span className="text-foreground">DonutSMP Fly Bypass</span>
+          <span className="text-foreground">Fly Bypass</span>
         </nav>
 
-        <div className="font-mono text-xs uppercase tracking-widest text-primary">
-          DonutSMP · Fly Bypass · May 2026
+        <div className="tag">
+          <Plane className="h-3 w-3" /> DonutSMP · Bypass · May 2026
         </div>
-        <h1 className="reveal mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-          The only working DonutSMP fly bypass in 2026.
+        <h1 className="font-display reveal mt-4 text-5xl leading-[1.02] md:text-7xl">
+          The only working <em className="text-gradient-brand not-italic">DonutSMP fly bypass</em>{" "}
+          in 2026.
         </h1>
-        <p className="reveal reveal-delay-1 mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="reveal reveal-delay-1 mt-6 max-w-2xl text-[16.5px] leading-relaxed text-muted-foreground">
           Short version: every public Meteor Client fly module gets flagged on DonutSMP within
           seconds. Argon Addon's <span className="font-mono text-foreground">Donut Bypass</span>{" "}
           mode is the one exception — and it's been the only working DonutSMP fly since spring 2025.
@@ -132,24 +131,25 @@ function FlyBypassPage() {
           <a
             href={DOWNLOAD_URL}
             download
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+            className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-semibold"
             data-testid="fly-download-btn"
           >
-            <Download className="h-4 w-4" /> Download Argon (fly bypass included)
+            <Download className="h-4 w-4" /> Download Argon (bypass included)
           </a>
           <Link
             to="/install"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition hover:border-primary/50"
+            className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-medium text-foreground"
           >
             Install guide
           </Link>
         </div>
 
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Why standard Meteor Client fly doesn't work on DonutSMP.
+        <section className="mt-16">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            Why standard Meteor fly{" "}
+            <em className="text-gradient-brand not-italic">doesn't work</em> on DonutSMP.
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               DonutSMP runs a custom anti-cheat layered on top of Grim. It specifically inspects
               vertical motion packets, gravity consistency, and the difference between client
@@ -163,14 +163,15 @@ function FlyBypassPage() {
           </div>
         </section>
 
-        <section className="mt-12 rounded-2xl border border-primary/30 bg-primary/5 p-7">
-          <div className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <Plane className="h-3.5 w-3.5" /> How Argon's bypass works
+        <section className="mt-14 rounded-3xl border border-primary/25 bg-primary/[0.04] p-8">
+          <div className="tag">
+            <Terminal className="h-3 w-3" /> How Argon's bypass works
           </div>
-          <h2 className="text-2xl font-bold tracking-tight">
-            Donut Bypass mode — packet mimicry, not raw fly.
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-4xl">
+            Donut Bypass mode — <em className="text-gradient-brand not-italic">packet mimicry</em>,
+            not raw fly.
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               Argon's <span className="font-mono text-foreground">Donut Bypass</span> doesn't send
               "fly" motion to the server. It sends a sequence of legitimate packets —
@@ -185,16 +186,16 @@ function FlyBypassPage() {
           </div>
         </section>
 
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Recommended settings (stay flagless).
+        <section className="mt-16">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            Recommended <em className="text-gradient-brand not-italic">settings.</em>
           </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-3 text-[14px] text-muted-foreground">
             Don't push these. The whole point is staying boring to the anti-cheat.
           </p>
-          <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card">
-            <table className="w-full text-sm">
-              <tbody className="font-mono text-xs">
+          <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card/40 backdrop-blur">
+            <table className="w-full text-[14px]">
+              <tbody className="font-mono text-[12.5px]">
                 {[
                   ["Module", "Movement → Fly"],
                   ["Mode", "Donut Bypass"],
@@ -205,9 +206,9 @@ function FlyBypassPage() {
                   ["Y-Speed Cap", "2.4"],
                   ["Toggle key", "Right Shift → Movement → Fly"],
                 ].map(([k, v], i) => (
-                  <tr key={k} className={i % 2 ? "bg-secondary/20" : ""}>
-                    <td className="border-r border-border px-5 py-3 text-muted-foreground">{k}</td>
-                    <td className="px-5 py-3 text-foreground">{v}</td>
+                  <tr key={k} className={i % 2 ? "bg-card/30" : ""}>
+                    <td className="border-r border-border px-5 py-3.5 text-muted-foreground">{k}</td>
+                    <td className="px-5 py-3.5 text-foreground">{v}</td>
                   </tr>
                 ))}
               </tbody>
@@ -215,28 +216,31 @@ function FlyBypassPage() {
           </div>
         </section>
 
-        <section className="mt-14 rounded-2xl border border-border bg-card p-7">
-          <div className="mb-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <AlertTriangle className="h-3.5 w-3.5" /> Reality check
+        <section className="mt-16 rounded-3xl border border-border glass p-8">
+          <div className="tag">
+            <AlertTriangle className="h-3 w-3" /> Reality check
           </div>
-          <h2 className="text-2xl font-bold tracking-tight">When the bypass flags.</h2>
-          <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-muted-foreground">
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-4xl">
+            When the bypass <em className="text-gradient-brand not-italic">flags.</em>
+          </h2>
+          <ul className="mt-5 space-y-2.5 text-[14.5px] leading-relaxed text-muted-foreground">
             <li>· DonutSMP pushes an anti-cheat update (usually every 2-3 weeks).</li>
             <li>· The bypass flags for 0-24 hours.</li>
             <li>· Argon ships a hotfix to GitHub releases.</li>
             <li>· You re-download the .jar, drop it in mods, you're back.</li>
           </ul>
-          <p className="mt-4 text-sm text-muted-foreground">
+          <p className="mt-5 text-[13.5px] text-muted-foreground">
             We monitor Donut's anti-cheat commits and ship patches usually within 6 hours of
             detection. Subscribe to the GitHub repo for release notifications.
           </p>
         </section>
 
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            What about other &quot;DonutSMP fly bypass&quot; downloads I see on YouTube?
+        <section className="mt-16">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            What about other &quot;DonutSMP fly&quot; downloads on{" "}
+            <em className="text-gradient-brand not-italic">YouTube?</em>
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>Three categories, all bad:</p>
             <ol className="ml-1 list-inside list-decimal space-y-2">
               <li>
@@ -258,36 +262,36 @@ function FlyBypassPage() {
           </div>
         </section>
 
-        <section className="mt-14 rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-secondary/40 p-8 text-center shadow-glow">
-          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
+        <section className="mt-16 overflow-hidden rounded-[2rem] border border-primary/25 bg-gradient-brand-soft p-10 text-center sm:p-14">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/[0.08] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
             <ShieldCheck className="h-3.5 w-3.5" /> Working as of{" "}
             {new Date().toISOString().slice(0, 10)}
           </div>
-          <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">
-            Download Argon. Get the working DonutSMP fly bypass.
+          <h2 className="font-display mt-5 text-3xl leading-tight md:text-5xl">
+            Get the <em className="text-gradient-brand not-italic">working bypass.</em>
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+          <p className="mx-auto mt-3 max-w-lg text-[14.5px] text-muted-foreground">
             Free .jar. 5-minute install. Donut Bypass mode ready out of the box.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a
               href={DOWNLOAD_URL}
               download
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+              className="btn-cta inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-semibold"
               data-testid="fly-cta-download-btn"
             >
-              <Download className="h-4 w-4" /> Download Argon Addon .jar
+              <Download className="h-4 w-4" /> Argon.Addon.1.21.11.jar
             </a>
             <Link
               to="/donutsmp-guide"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition hover:border-primary/50"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[14px] font-medium text-foreground"
             >
               Full DonutSMP guide
             </Link>
           </div>
-          <p className="mt-5 text-xs text-muted-foreground">
-            <Check className="-mt-0.5 mr-1 inline h-3 w-3 text-primary" /> No paid tier ·
-            <Check className="-mt-0.5 mx-1 inline h-3 w-3 text-primary" /> No key system ·
+          <p className="mt-6 text-[12px] text-muted-foreground">
+            <Check className="-mt-0.5 mr-1 inline h-3 w-3 text-primary" /> No paid tier ·{" "}
+            <Check className="-mt-0.5 mx-1 inline h-3 w-3 text-primary" /> No key system ·{" "}
             <Check className="-mt-0.5 mx-1 inline h-3 w-3 text-primary" /> Updated within 24h of
             every Donut patch
           </p>

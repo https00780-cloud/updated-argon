@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Download } from "lucide-react";
+import { Download, Clock } from "lucide-react";
 import { PageShell } from "../components/site-chrome";
 
 const SITE_URL = "https://argonaddon.com";
@@ -8,9 +8,7 @@ export const Route = createFileRoute("/changelog")({
   component: ChangelogPage,
   head: () => ({
     meta: [
-      {
-        title: "Argon Addon Changelog & Version History — All Releases (1.21.x)",
-      },
+      { title: "Argon Addon Changelog & Version History — All Releases (1.21.x)" },
       {
         name: "description",
         content:
@@ -128,47 +126,64 @@ function ChangelogPage() {
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-6 pb-24">
-        <div className="font-mono text-xs uppercase tracking-widest text-primary">Changelog</div>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-          Argon Addon — every release.
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
+          <span className="mx-2 opacity-60">/</span>
+          <span className="text-foreground">Changelog</span>
+        </nav>
+        <div className="tag">
+          <Clock className="h-3 w-3" /> Changelog
+        </div>
+        <h1 className="font-display mt-4 text-5xl leading-[1.04] md:text-7xl">
+          Every <em className="text-gradient-brand not-italic">release.</em>
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Full version history for Argon Addon. Each entry covers what shipped, what got patched,
-          and which DonutSMP anti-cheat update forced our hand that week.
+        <p className="mt-6 max-w-2xl text-[16.5px] leading-relaxed text-muted-foreground">
+          Full version history. Each entry covers what shipped, what got patched, and which
+          DonutSMP anti-cheat update forced our hand that week.
         </p>
 
-        <div className="mt-12 space-y-8">
+        <div className="mt-14 space-y-8">
           {releases.map((r) => (
             <section
               key={r.version}
-              className={`rounded-2xl border ${r.highlight ? "border-primary/40 bg-primary/5" : "border-border bg-card"} p-7`}
+              className={`rounded-3xl border p-8 backdrop-blur ${
+                r.highlight ? "border-primary/35 bg-primary/[0.04]" : "border-border bg-card/40"
+              }`}
               data-testid={`release-${r.version}`}
             >
               <div className="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 className="text-2xl font-bold tracking-tight">
-                  v{r.version}{" "}
+                <h2 className="font-display text-3xl leading-tight md:text-4xl">
+                  v{r.version}
                   {r.highlight && (
-                    <span className="ml-2 rounded-full bg-primary/20 px-2 py-0.5 align-middle font-mono text-[10px] uppercase tracking-widest text-primary">
+                    <span className="ml-3 align-middle rounded-full border border-primary/30 bg-primary/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
                       Latest
                     </span>
                   )}
                 </h2>
-                <div className="font-mono text-xs text-muted-foreground">
+                <div className="font-mono text-[11px] text-muted-foreground">
                   {r.date} · MC {r.mc}
                 </div>
               </div>
-              <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-muted-foreground">
+              <ul className="mt-5 space-y-2.5 text-[14.5px] leading-relaxed text-muted-foreground">
                 {r.notes.map((n) => (
-                  <li key={n}>· {n}</li>
+                  <li key={n} className="flex gap-3">
+                    <span className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-primary/70" />
+                    <span>{n}</span>
+                  </li>
                 ))}
               </ul>
             </section>
           ))}
         </div>
 
-        <section className="mt-12 rounded-2xl border border-border bg-card p-7">
-          <h2 className="text-xl font-bold tracking-tight">Roadmap — what's next.</h2>
-          <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-muted-foreground">
+        <section className="mt-12 rounded-3xl border border-border glass p-8">
+          <div className="tag">Roadmap</div>
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-4xl">
+            What's <em className="text-gradient-brand not-italic">next.</em>
+          </h2>
+          <ul className="mt-5 space-y-2.5 text-[14.5px] leading-relaxed text-muted-foreground">
             <li>· v3.3 — Inventory move queue (faster shulker dump on raids).</li>
             <li>· v3.3 — AH Sniper v3 with per-item profit overlay.</li>
             <li>· v3.4 — Module sharing: import profiles by URL.</li>
@@ -180,14 +195,14 @@ function ChangelogPage() {
           <Link
             to="/"
             hash="download"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+            className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-semibold"
             data-testid="changelog-download-btn"
           >
-            <Download className="h-4 w-4" /> Download latest Argon Addon
+            <Download className="h-4 w-4" /> Download latest Argon
           </Link>
           <Link
             to="/install"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition hover:border-primary/50"
+            className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-medium text-foreground"
           >
             Install guide
           </Link>

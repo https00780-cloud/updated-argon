@@ -12,19 +12,30 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
+      <div className="mesh-bg" aria-hidden />
+      <div className="relative max-w-md text-center">
+        <div className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+          Error · 404
+        </div>
+        <h1 className="font-display mt-3 text-7xl leading-none text-foreground">
+          Lost in the <em className="text-gradient-brand not-italic">void</em>.
+        </h1>
+        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+          That page doesn't exist, or it got patched out of the build. Head back to the homepage.
         </p>
-        <div className="mt-6">
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-cta inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium"
           >
             Go home
+          </Link>
+          <Link
+            to="/modules"
+            className="btn-ghost inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-foreground"
+          >
+            Browse modules
           </Link>
         </div>
       </div>
@@ -37,13 +48,17 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4">
+      <div className="mesh-bg" aria-hidden />
+      <div className="relative max-w-md text-center">
+        <div className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+          Runtime · Error
+        </div>
+        <h1 className="font-display mt-3 text-5xl leading-tight text-foreground">
+          Something didn't <em className="text-gradient-brand not-italic">load</em>.
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          Refresh or head back home. If it persists, ping us on Discord.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -51,13 +66,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-cta inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="btn-ghost inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-foreground"
           >
             Go home
           </a>
@@ -77,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Argon Addon — the only Meteor Client addon with a working fly bypass on DonutSMP. Free .jar download, 90+ modules for Crystal PvP, base finding, and AH sniping on Minecraft 1.21.11.",
+          "Argon Addon — the best Donut SMP bypass. Free Meteor Client addon with 90+ modules for DonutSMP and Minecraft 1.21.11. Free .jar download for Crystal PvP, base finding, and AH sniping.",
       },
       {
         name: "keywords",
@@ -99,10 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://argonaddon.com" },
-      {
-        property: "og:image",
-        content: "https://argonaddon.com/og-card.png",
-      },
+      { property: "og:image", content: "https://argonaddon.com/og-card.png" },
       { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -117,17 +129,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Argon Addon — Best Donut SMP Bypass" },
       {
         name: "twitter:description",
-        content: "Argon Addon — the best Donut SMP bypass. 90+ Meteor Client modules. Free download.",
+        content:
+          "Argon Addon — the best Donut SMP bypass. 90+ Meteor Client modules. Free download.",
       },
-      {
-        name: "twitter:image",
-        content: "https://argonaddon.com/og-card.png",
-      },
-      {
-        name: "twitter:image:alt",
-        content: "Argon Addon — best Donut SMP bypass.",
-      },
-      { name: "theme-color", content: "#e63a2e" },
+      { name: "twitter:image", content: "https://argonaddon.com/og-card.png" },
+      { name: "twitter:image:alt", content: "Argon Addon — best Donut SMP bypass." },
+      { name: "theme-color", content: "#d83a30" },
       { name: "format-detection", content: "telephone=no" },
     ],
     links: [
@@ -144,7 +151,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap",
       },
     ],
     scripts: [
@@ -159,7 +166,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           image: "https://argonaddon.com/og-card.png",
           logo: "https://argonaddon.com/favicon.png",
           description:
-            "Argon Addon — the Meteor Client addon for DonutSMP and Minecraft 1.21.11. Working fly bypass, 90+ modules, free .jar download.",
+            "Argon Addon — the Meteor Client addon for DonutSMP and Minecraft 1.21.11. Best Donut SMP bypass, 90+ modules, free .jar download.",
           inLanguage: "en",
           potentialAction: {
             "@type": "SearchAction",

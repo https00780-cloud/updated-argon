@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Download, ChevronRight, AlertTriangle } from "lucide-react";
+import { Download, ChevronRight, AlertTriangle, Terminal } from "lucide-react";
 import { PageShell } from "../components/site-chrome";
 
 const SITE_URL = "https://argonaddon.com";
@@ -10,9 +10,7 @@ export const Route = createFileRoute("/install")({
   component: InstallPage,
   head: () => ({
     meta: [
-      {
-        title: "How To Install Argon Addon On DonutSMP — Step-By-Step Guide (1.21.11)",
-      },
+      { title: "How To Install Argon Addon On DonutSMP — Step-By-Step Guide (1.21.11)" },
       {
         name: "description",
         content:
@@ -99,13 +97,17 @@ const Step = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <section id={id} className="relative scroll-mt-32 border-l-2 border-primary/30 pl-6">
-    <div className="absolute -left-3.5 top-0 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-brand font-mono text-xs font-bold text-primary-foreground shadow-glow">
-      {n}
-    </div>
-    <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-    <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-      {children}
+  <section id={id} className="relative scroll-mt-32">
+    <div className="flex items-start gap-5">
+      <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-brand font-mono text-base font-semibold text-primary-foreground shadow-glow ring-1 ring-primary/40">
+        {n}
+      </div>
+      <div className="flex-1 pt-1">
+        <h2 className="font-display text-3xl leading-tight md:text-4xl">{title}</h2>
+        <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          {children}
+        </div>
+      </div>
     </div>
   </section>
 );
@@ -114,18 +116,26 @@ function InstallPage() {
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-6 pb-24">
-        <div className="font-mono text-xs uppercase tracking-widest text-primary">
-          Install Guide
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
+          <span className="mx-2 opacity-60">/</span>
+          <span className="text-foreground">Install</span>
+        </nav>
+        <div className="tag">
+          <Terminal className="h-3 w-3" /> Install guide
         </div>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-          How to install Argon Addon on DonutSMP.
+        <h1 className="font-display mt-4 text-5xl leading-[1.05] md:text-7xl">
+          Install <em className="text-gradient-brand not-italic">Argon</em>
+          <br /> in five minutes.
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Five minutes, four steps, one .jar. This is the same setup every DonutSMP player who runs
-          Argon uses. No launcher, no installer script, no Discord verification.
+        <p className="mt-6 max-w-2xl text-[16.5px] leading-relaxed text-muted-foreground">
+          Five minutes, four steps, one .jar. Same setup every DonutSMP player who runs Argon uses.
+          No launcher, no installer script, no Discord verification.
         </p>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card p-5 sm:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-card/50 p-5 backdrop-blur sm:grid-cols-4">
           {[
             ["Minecraft", "1.21.11"],
             ["Loader", "Fabric"],
@@ -133,13 +143,15 @@ function InstallPage() {
             ["Java", "21+"],
           ].map(([k, v]) => (
             <div key={k}>
-              <div className="text-xs uppercase tracking-wider text-muted-foreground">{k}</div>
-              <div className="mt-1 font-mono text-sm font-semibold">{v}</div>
+              <div className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-muted-foreground">
+                {k}
+              </div>
+              <div className="mt-2 font-mono text-sm font-semibold text-foreground">{v}</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 space-y-12">
+        <div className="mt-14 space-y-14">
           <Step n={1} id="fabric" title="Install Fabric Loader 1.21.11">
             <p>
               Argon is a Fabric mod, not Forge. Grab the Fabric Installer from{" "}
@@ -178,18 +190,20 @@ function InstallPage() {
               </a>{" "}
               (pick the 1.21.11 dev build). Open your mods folder:
             </p>
-            <ul className="list-inside space-y-1 font-mono text-xs">
+            <ul className="list-inside space-y-1 font-mono text-[12px]">
               <li>
-                · Windows · <span className="text-foreground">%appdata%\.minecraft\mods</span>
+                <span className="text-muted-foreground/70">Windows ·</span>{" "}
+                <span className="text-foreground">%appdata%\.minecraft\mods</span>
               </li>
               <li>
-                · macOS ·{" "}
+                <span className="text-muted-foreground/70">macOS ·</span>{" "}
                 <span className="text-foreground">
                   ~/Library/Application Support/minecraft/mods
                 </span>
               </li>
               <li>
-                · Linux · <span className="text-foreground">~/.minecraft/mods</span>
+                <span className="text-muted-foreground/70">Linux ·</span>{" "}
+                <span className="text-foreground">~/.minecraft/mods</span>
               </li>
             </ul>
             <p>If the folder doesn't exist, create it. Drop the Meteor .jar inside.</p>
@@ -200,7 +214,7 @@ function InstallPage() {
             <a
               href={DOWNLOAD_URL}
               download
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+              className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-medium"
               data-testid="install-download-btn"
             >
               <Download className="h-4 w-4" /> Download Argon.Addon.1.21.11.jar
@@ -216,7 +230,7 @@ function InstallPage() {
             <p>
               Pick the <span className="font-mono">fabric-loader-1.21.11</span> profile in the
               launcher. Hit play. Once you're in the main menu, press{" "}
-              <kbd className="rounded border border-border bg-secondary px-2 py-0.5 font-mono text-xs">
+              <kbd className="rounded-md border border-border bg-secondary px-2 py-0.5 font-mono text-xs">
                 Right Shift
               </kbd>{" "}
               — Meteor's click GUI opens. Argon's modules are mixed into the existing categories
@@ -229,25 +243,26 @@ function InstallPage() {
           </Step>
         </div>
 
-        {/* Troubleshooting */}
-        <section className="mt-16 rounded-2xl border border-border bg-card p-7">
-          <div className="mb-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <AlertTriangle className="h-3.5 w-3.5" /> Common install issues
+        <section className="mt-20 rounded-3xl border border-border glass p-8">
+          <div className="tag">
+            <AlertTriangle className="h-3 w-3" /> Common install issues
           </div>
-          <h2 className="text-2xl font-bold tracking-tight">It didn't work. Now what?</h2>
-          <div className="mt-5 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-4xl">
+            It didn't work. <em className="text-gradient-brand not-italic">Now what?</em>
+          </h2>
+          <div className="mt-7 space-y-6 text-[15px] leading-relaxed text-muted-foreground">
             <div>
               <div className="font-semibold text-foreground">
                 Crash on launch — "incompatible loader version"
               </div>
-              <p>
+              <p className="mt-1">
                 You're mixing 1.21.4 / 1.21.6 mods with 1.21.11. Open the mods folder and delete
                 anything that isn't tagged 1.21.11.
               </p>
             </div>
             <div>
               <div className="font-semibold text-foreground">"Fabric API not found"</div>
-              <p>
+              <p className="mt-1">
                 You need Fabric API — separate from Fabric Loader. Grab it from{" "}
                 <a
                   className="text-foreground underline decoration-primary/40 underline-offset-4"
@@ -264,7 +279,7 @@ function InstallPage() {
               <div className="font-semibold text-foreground">
                 Argon modules don't show up in the GUI
               </div>
-              <p>
+              <p className="mt-1">
                 Meteor Client probably failed to load Argon as an addon. Check your{" "}
                 <span className="font-mono">latest.log</span> in{" "}
                 <span className="font-mono">.minecraft/logs</span> — look for "[Argon]" lines. 9
@@ -273,7 +288,7 @@ function InstallPage() {
             </div>
             <div>
               <div className="font-semibold text-foreground">Java version error</div>
-              <p>
+              <p className="mt-1">
                 1.21.11 needs Java 21. The Minecraft launcher ships its own JRE these days, but if
                 you launch through MultiMC/Prism, point it at a Java 21 install.
               </p>
@@ -282,7 +297,7 @@ function InstallPage() {
               <div className="font-semibold text-foreground">
                 Fly toggles but the server kicks me
               </div>
-              <p>
+              <p className="mt-1">
                 You're on the default Meteor fly. Switch the Mode to{" "}
                 <span className="font-mono">Donut Bypass</span> and turn speed down to 1.2. The
                 default Vanilla mode is detection bait on DonutSMP.
@@ -294,13 +309,13 @@ function InstallPage() {
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
             to="/donutsmp-guide"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold transition hover:border-primary/50"
+            className="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13.5px] font-medium text-foreground"
           >
-            Next: DonutSMP setup guide <ChevronRight className="h-4 w-4" />
+            Next · DonutSMP setup guide <ChevronRight className="h-4 w-4" />
           </Link>
           <Link
             to="/changelog"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold transition hover:border-primary/50"
+            className="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13.5px] font-medium text-foreground"
           >
             Changelog <ChevronRight className="h-4 w-4" />
           </Link>

@@ -8,9 +8,7 @@ export const Route = createFileRoute("/donutsmp-guide")({
   component: GuidePage,
   head: () => ({
     meta: [
-      {
-        title: "Argon Addon On DonutSMP — Full Guide, Fly Bypass & Best Modules (2026)",
-      },
+      { title: "Argon Addon On DonutSMP — Full Guide, Fly Bypass & Best Modules (2026)" },
       {
         name: "description",
         content:
@@ -73,23 +71,36 @@ export const Route = createFileRoute("/donutsmp-guide")({
   }),
 });
 
+const Pill = ({ icon: Icon, children }: { icon: typeof Plane; children: React.ReactNode }) => (
+  <div className="tag">
+    <Icon className="h-3 w-3" /> {children}
+  </div>
+);
+
 function GuidePage() {
   return (
     <PageShell>
       <article className="mx-auto max-w-3xl px-6 pb-24">
-        <div className="font-mono text-xs uppercase tracking-widest text-primary">
-          DonutSMP Guide
-        </div>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-          Argon Addon on DonutSMP — the complete guide.
+        <nav aria-label="Breadcrumb" className="mb-6 font-mono text-[11px] text-muted-foreground">
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
+          <span className="mx-2 opacity-60">/</span>
+          <span className="text-foreground">DonutSMP Guide</span>
+        </nav>
+
+        <div className="tag">DonutSMP Guide · Updated May 2026</div>
+        <h1 className="font-display mt-4 text-5xl leading-[1.02] md:text-7xl">
+          Argon on DonutSMP — the{" "}
+          <em className="text-gradient-brand not-italic">complete guide.</em>
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-2xl text-[16.5px] leading-relaxed text-muted-foreground">
           Everything Argon does specifically for DonutSMP — the fly bypass, the AH sniper, the base
-          finder stack, and which Crystal PvP modules to actually toggle. Updated May 2026 for
-          the 1.21.11 anti-cheat push.
+          finder stack, and which Crystal PvP modules to actually toggle. Updated May 2026 for the
+          1.21.11 anti-cheat push.
         </p>
 
-        <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-card">
+        <figure className="mt-12 overflow-hidden rounded-3xl border border-border bg-card/40 backdrop-blur">
           <img
             src="/screenshots/base-finder-argon-addon.png"
             alt="Argon Addon's base finder and StorageESP locating a hidden DonutSMP base through walls"
@@ -98,17 +109,17 @@ function GuidePage() {
             width={1280}
             height={800}
           />
-          <figcaption className="border-t border-border px-5 py-3 font-mono text-xs text-muted-foreground">
+          <figcaption className="border-t border-border px-5 py-3 font-mono text-[11px] text-muted-foreground">
             Argon's Base Finder rendering a buried storage room on DonutSMP via StorageESP.
           </figcaption>
         </figure>
 
-        {/* Why Argon */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Why people call it the best addon for DonutSMP.
+        <section className="mt-16">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            Why people call it the{" "}
+            <em className="text-gradient-brand not-italic">best addon for DonutSMP.</em>
           </h2>
-          <div className="mt-5 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               DonutSMP runs a heavily-modified anti-cheat that hard-flags most public Meteor Client
               modules. If you've tried plain Meteor on Donut, you already know — toggle Speed and
@@ -124,15 +135,12 @@ function GuidePage() {
           </div>
         </section>
 
-        {/* Fly bypass */}
-        <section id="fly" className="mt-14 rounded-2xl border border-primary/30 bg-primary/5 p-7">
-          <div className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <Plane className="h-3.5 w-3.5" /> The fly bypass
-          </div>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            The only working fly bypass on DonutSMP.
+        <section id="fly" className="mt-14 rounded-3xl border border-primary/25 bg-primary/[0.04] p-8">
+          <Pill icon={Plane}>The fly bypass</Pill>
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-5xl">
+            The only working <em className="text-gradient-brand not-italic">fly</em> on DonutSMP.
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               This is what most people are downloading Argon for, so let's be direct about it. Argon
               ships a custom Fly mode called{" "}
@@ -142,32 +150,20 @@ function GuidePage() {
               sent that way.
             </p>
             <p>Recommended settings for staying under the radar:</p>
-            <ul className="ml-1 list-inside space-y-1.5 font-mono text-xs">
-              <li>
-                · Mode · <span className="text-foreground">Donut Bypass</span>
-              </li>
-              <li>
-                · Speed · <span className="text-foreground">1.2 (do not push past 1.6)</span>
-              </li>
-              <li>
-                · Glide · <span className="text-foreground">true</span>
-              </li>
-              <li>
-                · Motion Smoothing · <span className="text-foreground">High</span>
-              </li>
-              <li>
-                · Anti-Kick · <span className="text-foreground">true</span>
-              </li>
-              <li>
-                · Y-Speed Cap · <span className="text-foreground">2.4</span>
-              </li>
+            <ul className="ml-1 list-inside space-y-1.5 font-mono text-[12.5px]">
+              <li>· Mode · <span className="text-foreground">Donut Bypass</span></li>
+              <li>· Speed · <span className="text-foreground">1.2 (do not push past 1.6)</span></li>
+              <li>· Glide · <span className="text-foreground">true</span></li>
+              <li>· Motion Smoothing · <span className="text-foreground">High</span></li>
+              <li>· Anti-Kick · <span className="text-foreground">true</span></li>
+              <li>· Y-Speed Cap · <span className="text-foreground">2.4</span></li>
             </ul>
             <p>
               When Donut pushes an anti-cheat update (which usually happens every 2-3 weeks), the
               bypass might flag for a few hours. Keep an eye on the Argon GitHub releases — patches
               drop within 24 hours, usually closer to 6.
             </p>
-            <p className="text-sm">
+            <p className="text-[13.5px]">
               <strong className="text-foreground">Disclaimer:</strong> any utility module on a
               server with rules against them carries risk. Argon minimises detection — it doesn't
               eliminate it.
@@ -175,15 +171,13 @@ function GuidePage() {
           </div>
         </section>
 
-        {/* AH Sniper */}
-        <section className="mt-14">
-          <div className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <Coins className="h-3.5 w-3.5" /> Auction house
-          </div>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            AH Sniper — how to actually make money.
+        <section className="mt-16">
+          <Pill icon={Coins}>Auction house</Pill>
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-5xl">
+            AH Sniper — how to actually{" "}
+            <em className="text-gradient-brand not-italic">make money.</em>
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               The DonutSMP auction house is where Argon users print. AH Sniper watches every new
               listing as it appears, compares against your price filters, and clicks buy with
@@ -191,7 +185,7 @@ function GuidePage() {
               misses every good listing.
             </p>
             <p>The setup most regulars use:</p>
-            <ul className="ml-1 list-inside space-y-1.5 font-mono text-xs">
+            <ul className="ml-1 list-inside space-y-1.5 font-mono text-[12.5px]">
               <li>· Set max bid per item type (netherite block, talisman, etc.)</li>
               <li>· Whitelist categories you actually flip — don't snipe everything</li>
               <li>· Set "min profit margin" to 25% — anything lower isn't worth inventory slots</li>
@@ -207,15 +201,13 @@ function GuidePage() {
           </div>
         </section>
 
-        {/* Base Finder */}
-        <section className="mt-14">
-          <div className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <Radar className="h-3.5 w-3.5" /> Base finding
-          </div>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Finding bases — the Argon stack.
+        <section className="mt-16">
+          <Pill icon={Radar}>Base finding</Pill>
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-5xl">
+            Finding bases — the{" "}
+            <em className="text-gradient-brand not-italic">Argon stack.</em>
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               No single module finds bases. Argon's approach stacks five modules that each catch one
               thing the others miss:
@@ -250,15 +242,13 @@ function GuidePage() {
           </div>
         </section>
 
-        {/* Crystal PvP */}
-        <section className="mt-14">
-          <div className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <Swords className="h-3.5 w-3.5" /> Crystal PvP
-          </div>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Crystal PvP modules worth toggling.
+        <section className="mt-16">
+          <Pill icon={Swords}>Crystal PvP</Pill>
+          <h2 className="font-display mt-4 text-3xl leading-tight md:text-5xl">
+            Crystal PvP modules worth{" "}
+            <em className="text-gradient-brand not-italic">toggling.</em>
           </h2>
-          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
             <p>
               Crystal PvP on DonutSMP is fast — fights end in under 8 seconds against good players.
               You don't want a CrystalAura that places its own crystals (instant flag), you want one
@@ -266,44 +256,36 @@ function GuidePage() {
               you place, it breaks at frame-perfect tick.
             </p>
             <p>The minimum loadout:</p>
-            <ul className="ml-1 list-inside space-y-1.5 font-mono text-xs">
-              <li>
-                · Combat · <span className="text-foreground">CrystalAura (Manual+)</span>
-              </li>
-              <li>
-                · Combat · <span className="text-foreground">AutoTotem (offhand)</span>
-              </li>
-              <li>
-                · Combat · <span className="text-foreground">Hover Totem</span>
-              </li>
-              <li>
-                · Combat · <span className="text-foreground">Anchor Macro (for nether fights)</span>
-              </li>
-              <li>
-                · Movement · <span className="text-foreground">Wind Pearl Macro (gap-closer)</span>
-              </li>
-              <li>
-                · Render · <span className="text-foreground">Target HUD</span>
-              </li>
+            <ul className="ml-1 list-inside space-y-1.5 font-mono text-[12.5px]">
+              <li>· Combat · <span className="text-foreground">CrystalAura (Manual+)</span></li>
+              <li>· Combat · <span className="text-foreground">AutoTotem (offhand)</span></li>
+              <li>· Combat · <span className="text-foreground">Hover Totem</span></li>
+              <li>· Combat · <span className="text-foreground">Anchor Macro (for nether fights)</span></li>
+              <li>· Movement · <span className="text-foreground">Wind Pearl Macro (gap-closer)</span></li>
+              <li>· Render · <span className="text-foreground">Target HUD</span></li>
             </ul>
           </div>
         </section>
 
-        {/* Comparison */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Argon vs other Meteor Client addons on DonutSMP.
+        <section className="mt-16">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            Argon vs other{" "}
+            <em className="text-gradient-brand not-italic">Meteor addons</em> on DonutSMP.
           </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-3 text-[14px] text-muted-foreground">
             The honest, no-corporate-buzzword table.
           </p>
-          <div className="mt-5 overflow-x-auto rounded-2xl border border-border bg-card">
-            <table className="w-full text-sm">
-              <thead className="border-b border-border bg-secondary/40 text-left">
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card/40 backdrop-blur">
+            <table className="w-full text-[14px]">
+              <thead className="border-b border-border bg-card/60 text-left">
                 <tr>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">Capability</th>
-                  <th className="px-5 py-4 font-semibold">Argon</th>
-                  <th className="px-5 py-4 font-medium text-muted-foreground">
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    Capability
+                  </th>
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                    Argon
+                  </th>
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                     Other public addons
                   </th>
                 </tr>
@@ -317,20 +299,20 @@ function GuidePage() {
                   ["Crystal PvP Manual+ rotation", true, true],
                   ["Free, no paid tier", true, true],
                 ].map(([label, a, b], i) => (
-                  <tr key={String(label)} className={i % 2 ? "bg-secondary/20" : ""}>
-                    <td className="px-5 py-3.5">{label as string}</td>
+                  <tr key={String(label)} className={i % 2 ? "bg-card/30" : ""}>
+                    <td className="px-5 py-3.5 text-foreground">{label as string}</td>
                     <td className="px-5 py-3.5">
                       {a ? (
                         <Check className="h-4 w-4 text-primary" />
                       ) : (
-                        <X className="h-4 w-4 text-muted-foreground" />
+                        <X className="h-4 w-4 text-muted-foreground/60" />
                       )}
                     </td>
                     <td className="px-5 py-3.5">
                       {b ? (
                         <Check className="h-4 w-4 text-primary" />
                       ) : (
-                        <X className="h-4 w-4 text-muted-foreground" />
+                        <X className="h-4 w-4 text-muted-foreground/60" />
                       )}
                     </td>
                   </tr>
@@ -340,24 +322,25 @@ function GuidePage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mt-16 rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-secondary/40 p-8 text-center shadow-glow">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Ready to install Argon?</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+        <section className="mt-16 overflow-hidden rounded-[2rem] border border-primary/25 bg-gradient-brand-soft p-10 text-center sm:p-14">
+          <h2 className="font-display text-3xl leading-tight md:text-5xl">
+            Ready to install <em className="text-gradient-brand not-italic">Argon?</em>
+          </h2>
+          <p className="mx-auto mt-3 max-w-lg text-[14.5px] text-muted-foreground">
             Free .jar. Five-minute install. Works on DonutSMP today.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link
               to="/"
               hash="download"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
+              className="btn-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-semibold"
               data-testid="guide-download-btn"
             >
               <Download className="h-4 w-4" /> Download Argon Addon
             </Link>
             <Link
               to="/install"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition hover:border-primary/50"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-medium text-foreground"
             >
               Read the install guide
             </Link>
