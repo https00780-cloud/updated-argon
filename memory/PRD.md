@@ -29,11 +29,15 @@
 - ✅ Visual polish: animated mesh-blob hero background, `btn-cta` shimmer + lift,
   `lift-card` hover for module/feature/testimonial cards, stronger focus ring.
 
-## Cloudflare configuration (user must set this in dashboard)
-- **Build command:**  `bun install --frozen-lockfile && bun run build`
-- **Deploy command:** `npx wrangler deploy --config dist/server/wrangler.json`
-  (or `bun run deploy`)
-- **Root directory:** project root (default).
+## Cloudflare configuration (no dashboard change required)
+- Default deploy command `npx wrangler deploy` now self-builds because
+  root `wrangler.jsonc` declares `build.command` and points `main`/`assets`
+  at `dist/server/index.js` / `dist/client`.
+- Build runs `bun install --frozen-lockfile && bun run build` on every deploy.
+- Dev still uses `src/server.ts` via the separate `wrangler.dev.jsonc`
+  (passed to `@cloudflare/vite-plugin` from `vite.config.ts`).
+- Verified locally with `npx wrangler deploy --dry-run` — uploads 37 files,
+  1.2 MiB total, no errors.
 
 ## How to get the favicon to show in Google search
 1. Push the updated code to your repo + redeploy.

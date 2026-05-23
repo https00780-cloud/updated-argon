@@ -3,9 +3,5 @@
   "name": "argon-red-spark",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "dist/server/index.js",
-  "assets": { "directory": "dist/client" },
-  "build": {
-    "command": "bun install --frozen-lockfile && bun run build"
-  }
+  "main": "src/server.ts"
 }
